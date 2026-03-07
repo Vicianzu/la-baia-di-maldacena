@@ -27,13 +27,15 @@ Ogni paper viene salvato come file Markdown leggibile nella cartella `papers/`.
 ```
 la-baia-di-maldacena/
 ├── README.md                        # Questo file
-├── fetch_papers.py                  # Script Python principale
+├── fetch_papers.py                  # Scarica paper da arXiv
+├── explain_paper.py                 # Genera spiegazioni in italiano dei paper
 ├── requirements.txt                 # Dipendenze Python (requests, feedparser)
 ├── papers/                          # Cartella dove vengono salvati i paper
 │   ├── GLOSSARIO.md                 # Glossario dei concetti fisici chiave
 │   ├── latest.md                    # Riepilogo dell'ultimo aggiornamento
 │   └── YYYY-MM-DD/                  # Sottocartelle per data
-│       └── <arxiv-id>.md            # Un file per paper (con guida alla lettura)
+│       ├── <arxiv-id>.md            # Paper (abstract + guida alla lettura)
+│       └── <arxiv-id>_SPIEGAZIONE.md  # Spiegazione dettagliata in italiano
 └── .github/
     └── workflows/
         └── fetch-papers.yml         # GitHub Action schedulata
@@ -66,6 +68,32 @@ ciascuno con una **sezione "Guida alla lettura"** che spiega i concetti chiave r
 
 Consulta [`papers/GLOSSARIO.md`](papers/GLOSSARIO.md) per una spiegazione
 dei termini fisici più comuni (AdS/CFT, BMS, olografia celestiale…).
+
+---
+
+## 💡 Farsi spiegare un paper
+
+Dopo aver scaricato i paper, usa `explain_paper.py` per generare una spiegazione
+dettagliata in italiano — con contesto storico, idea principale, risultati chiave
+e domande guida per approfondire:
+
+```bash
+python explain_paper.py                              # spiega il paper più recente
+python explain_paper.py papers/2024-01-14/2401.07962.md  # spiega un paper specifico
+python explain_paper.py --all                        # spiega tutti i paper
+python explain_paper.py --list                       # elenca i paper (con stato spiegazione)
+```
+
+Le spiegazioni vengono salvate come `<arxiv-id>_SPIEGAZIONE.md` accanto al paper originale,
+con sezioni di:
+
+- 🎯 **Sommario** — di cosa parla il paper in parole semplici
+- 🔍 **Il problema** — cosa cercano di risolvere gli autori
+- 🧠 **L'idea principale** — il metodo o la tecnica centrale
+- 📐 **La matematica** — le formule chiave spiegate
+- 🌍 **Perché è importante** — le implicazioni fisiche
+- 📚 **Connessioni** — link agli altri paper dell'archivio
+- ❓ **Domande per Copilot Chat** — prompt pronti da usare
 
 ---
 
