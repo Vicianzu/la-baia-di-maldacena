@@ -30,9 +30,10 @@ la-baia-di-maldacena/
 ├── fetch_papers.py                  # Script Python principale
 ├── requirements.txt                 # Dipendenze Python (requests, feedparser)
 ├── papers/                          # Cartella dove vengono salvati i paper
+│   ├── GLOSSARIO.md                 # Glossario dei concetti fisici chiave
 │   ├── latest.md                    # Riepilogo dell'ultimo aggiornamento
 │   └── YYYY-MM-DD/                  # Sottocartelle per data
-│       └── <arxiv-id>.md            # Un file per paper
+│       └── <arxiv-id>.md            # Un file per paper (con guida alla lettura)
 └── .github/
     └── workflows/
         └── fetch-papers.yml         # GitHub Action schedulata
@@ -55,10 +56,16 @@ la-baia-di-maldacena/
 
 3. Esegui lo script:
    ```bash
-   python fetch_papers.py
+   python fetch_papers.py              # tutti i paper degli ultimi 7 giorni
+   python fetch_papers.py --limit 5    # solo i 5 paper più recenti
+   python fetch_papers.py --days 14    # amplia la finestra a 14 giorni
    ```
 
-I paper verranno salvati nella cartella `papers/` suddivisi per data.
+I paper verranno salvati nella cartella `papers/` suddivisi per data,
+ciascuno con una **sezione "Guida alla lettura"** che spiega i concetti chiave rilevati.
+
+Consulta [`papers/GLOSSARIO.md`](papers/GLOSSARIO.md) per una spiegazione
+dei termini fisici più comuni (AdS/CFT, BMS, olografia celestiale…).
 
 ---
 
